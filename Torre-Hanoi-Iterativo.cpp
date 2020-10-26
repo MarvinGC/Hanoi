@@ -3,30 +3,27 @@ using namespace std;
 
 int f[1000000],g[1000000],h[1000000];
 
-int potencia(int base, int exponente)
+int pot(int base, int exp)
 {
-    int result = 1;
-    for(int i=0; i<exponente; i++)
-    {
-        result=result*base;
+    int res;
+    if(exp == 0)
+        return 1;
+    else{
+        res = pot(base,exp/2);
+        return (exp%2==0) ? res*res : res*res*base;
     }
-    return result;
 }
 ///suma 1, si es 3 regresa a 1
 int bucle3suma(int valor)
 {
     valor++;
-    if(valor>3)
-        valor=1;
-    return valor;
+    return (valor>3) ? 1 : valor;
 }
 ///resta 1, si es 1 regresa a 3
 int bucle3resta(int valor)
 {
     valor--;
-    if(valor<1)
-        valor=3;
-    return valor;
+    return (valor<1) ? 3 : valor;
 }
 int main()
 {
@@ -46,7 +43,7 @@ int main()
     cout << "Escribe el numero de platillos"<<endl;
     cin >> numPlat;
 
-    numPasos = potencia(2,numPlat);
+    numPasos = pot(2,numPlat);
     mitadPasos = numPasos/2;
     /**
     *cada movimiento se guarda en la mitad del
@@ -64,7 +61,7 @@ int main()
         platillo--;
         if(caso)
         {
-            movPlat = potencia(2,ex);
+            movPlat = pot(2,ex);
             mPasos = mitadPasos/2;
 
             nTorre1=2; nTorre2=1;
@@ -82,7 +79,7 @@ int main()
         }
         if(!caso)
         {
-            movPlat = potencia(2,ex);
+            movPlat = pot(2,ex);
             mPasos = mitadPasos/2;
 
             nTorre1=3; nTorre2=1;
